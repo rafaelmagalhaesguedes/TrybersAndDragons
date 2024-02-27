@@ -1,6 +1,6 @@
 import Race from './Race';
 
-class Dwarf extends Race {
+export default class Dwarf extends Race {
   private static instancesCount = 0;
   private life = 80;
 
@@ -17,5 +17,3 @@ class Dwarf extends Race {
     return this.life;
   }
 }
-
-export default Dwarf;
