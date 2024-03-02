@@ -1,7 +1,7 @@
 import Monster from './Monster';
 
 export default class Dragon extends Monster {
-  private _dragonLife = 0;
+  private _dragonLife: number;
 
   constructor() {
     super();
