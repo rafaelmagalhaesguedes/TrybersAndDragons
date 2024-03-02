@@ -1,14 +1,10 @@
+import Battle, { PVP, PVE } from './Battle';
 import Character from './Character';
-import PVP from './Battle/PVP';
-import Battle from './Battle/Battle';
-import { PVE } from './Battle';
 import Monster from './Monster';
 import Dragon from './Dragon';
 
 // Create 3 Character objects
 const player1 = new Character('player1');
-
-// Level up player1
 player1.levelUp();
 player1.levelUp();
 
@@ -30,5 +26,4 @@ const runBattles = (battles: Battle[]) => {
   battles.forEach((battle: Battle) => battle.fight());
 };
 
-// Export the created objects and function
-export { player1, player2, player3, pvp, pve, runBattles };
+export { player1, player2, player3, monster1, monster2, pvp, pve, runBattles };
