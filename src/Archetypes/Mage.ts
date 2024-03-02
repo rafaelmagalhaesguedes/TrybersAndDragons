@@ -7,12 +7,12 @@ export default class Mage extends Archetype {
 
   constructor(name: string, energyType: EnergyType = 'mana') {
     super(name);
-    Mage.instancesCount.push(Mage.instancesCount.length + 1);
     this._energyType = energyType;
   }
 
   static createdArchetypeInstances(): number {
-    return this.instancesCount.length;
+    Mage.instancesCount.push(Mage.instancesCount.length + 1);
+    return Mage.instancesCount.length;
   }
 
   get energyType(): EnergyType {

@@ -7,12 +7,12 @@ export default class Necromancer extends Archetype {
 
   constructor(name: string, energyType: EnergyType = 'mana') {
     super(name);
-    Necromancer.instancesCount.push(Necromancer.instancesCount.length + 1);
     this._energyType = energyType;
   }
 
   static createdArchetypeInstances(): number {
-    return this.instancesCount.length;
+    Necromancer.instancesCount.push(Necromancer.instancesCount.length + 1);
+    return Necromancer.instancesCount.length;
   }
 
   get energyType(): EnergyType {

@@ -7,12 +7,12 @@ export default class Warrior extends Archetype {
 
   constructor(name: string, energyType: EnergyType = 'stamina') {
     super(name);
-    Warrior.instancesCount.push(Warrior.instancesCount.length + 1);
     this._energyType = energyType;
   }
 
   static createdArchetypeInstances(): number {
-    return this.instancesCount.length;
+    Warrior.instancesCount.push(Warrior.instancesCount.length + 1);
+    return Warrior.instancesCount.length;
   }
 
   get energyType(): EnergyType {

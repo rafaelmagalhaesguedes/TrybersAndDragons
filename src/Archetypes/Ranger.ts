@@ -7,12 +7,12 @@ export default class Ranger extends Archetype {
 
   constructor(name: string, energyType: EnergyType = 'stamina') {
     super(name);
-    Ranger.instancesCount.push(Ranger.instancesCount.length + 1);
     this._energyType = energyType;
   }
 
   static createdArchetypeInstances(): number {
-    return this.instancesCount.length;
+    Ranger.instancesCount.push(Ranger.instancesCount.length + 1);
+    return Ranger.instancesCount.length;
   }
 
   get energyType(): EnergyType {
