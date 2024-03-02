@@ -19,7 +19,7 @@ export default class Character implements Fighter {
     this._race = new Elf(name, this._dexterity);
     this._archetype = new Mage(name);
     this._maxLifePoints = this._race.maxLifePoints / 2;
-    this._lifePoints = this._race.maxLifePoints;
+    this._lifePoints = this._maxLifePoints;
     this._strength = getRandomInt(1, 10);
     this._defense = getRandomInt(1, 10);
     this._energy = {
@@ -28,39 +28,39 @@ export default class Character implements Fighter {
     };
   }
 
-  get race() {
+  get race(): Race {
     return this._race;
   }
 
-  get archetype() {
+  get archetype(): Archetype {
     return this._archetype;
   }
 
-  get lifePoints() {
+  get lifePoints(): number {
     return this._lifePoints;
   }
 
-  get strength() {
+  get strength(): number {
     return this._strength;
   }
 
-  get defense() {
+  get defense(): number {
     return this._defense;
   }
 
-  get dexterity() {
+  get dexterity(): number {
     return this._dexterity;
   }
 
-  get energy() {
+  get energy(): Energy {
     return { ...this._energy };
   }
 
-  receiveDamage(attackPoints: number): number {
-    const damage = Math.max(0, attackPoints - this._defense);
-    this._lifePoints = Math.max(0, this._lifePoints - damage);
-    
-    return this._lifePoints <= 0 ? -1 : this._lifePoints;
+  receiveDamage(attack: number): number {
+    const damage = Math.max(attack - this._defense, 1);
+    this._lifePoints -= damage;
+    this._lifePoints = this._lifePoints < 0 ? -1 : this._lifePoints;
+    return this._lifePoints;
   }
 
   attack(enemy: SimpleFighter): void {
@@ -71,17 +71,12 @@ export default class Character implements Fighter {
   levelUp(): void {
     const increment = getRandomInt(1, 10);
 
+    this._maxLifePoints = Math.min(this._race.maxLifePoints, this._maxLifePoints + increment);
     this._strength += increment;
     this._dexterity += increment;
     this._defense += increment;
     this._energy.amount = 10;
 
-    const newMaxLifePoints = this._maxLifePoints + increment;
-
-    if (newMaxLifePoints < this._race.maxLifePoints) {
-      this._maxLifePoints = newMaxLifePoints;
-    } else {
-      this._maxLifePoints = this._race.maxLifePoints;
-    }
+    this._lifePoints = this._maxLifePoints;
   }
 }
